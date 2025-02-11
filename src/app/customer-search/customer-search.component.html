@@ -1,0 +1,85 @@
+<div class="content-container mt-1" style="text-align: center;">
+  <h4>Customer Search
+  <a class="toggle-btn" (click)="toggleSearch()">
+    <span [hidden]="isSearchCollapsed">
+      <img src="../assets/toggle.png"/>
+    </span>
+    <span [hidden]="!isSearchCollapsed">
+      <img src="../assets/untoggle.png"/>
+    </span>
+  </a>
+  </h4>
+</div>
+<div class="content-container">
+    <div class="card p-2 search-section" [hidden]="isSearchCollapsed">
+      <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="customerId">Customer ID</label>
+                <input id="customerId" class="form-control" formControlName="customerId">
+            </div>
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input id="firstName" class="form-control" formControlName="firstName">
+            </div>
+            <div class="form-group">
+                <label for="zipCode">ZIP Code</label>
+                <input id="zipCode" class="form-control" formControlName="zipCode">
+            </div>
+            <div class="form-group">
+                <label for="creationDate">Creation Date</label>
+                <input id="creationDate" class="form-control" formControlName="creationDate" type="date">
+            </div>
+            <div class="form-group">
+              <button class="btn btn-primary search-btn" type="submit">Search</button>
+            </div> 
+        </div>
+      </form>
+    </div>
+
+    <div class="card results-container">
+      <div class="table-responsive">
+      <table class="table table-bordered table-hover">
+        <thead class="sticky-header">
+          <tr>
+            <th>Select</th>
+            <th (click)="sort('id')">ID</th>
+            <th (click)="sort('firstName')">First Name</th>
+            <th (click)="sort('lastName')">Last Name</th>
+            <th (click)="sort('zipCode')">ZIP Code</th>
+            <th (click)="sort('creationDate')">Creation Date</th>
+            <th>Location</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+      </table>
+      <div class="table-body-scroll">
+        <table class="table table-bordered table-hover">
+        <tbody>
+          <tr *ngFor="let customer of customers">
+            <td><input type="radio" name="selectedCustomer" (change)="selectCustomer(customer)"></td>
+            <td>{{ customer.id }}</td>
+            <td>{{ customer.firstName }}</td>
+            <td>{{ customer.address }}</td>
+            <td>{{ customer.zipCode }}</td>
+            <td>{{ customer.creationDate | date }}</td>
+            <td><select class="form-control">
+                <option *ngFor="let location of customer.locations" [value]="location">{{ location }}</option>
+              </select>
+            </td>
+            <td>
+              <button class="btn btn-success" (click)="goToOrderPage(customer)">Order</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+      <p *ngIf="!customers.length && !isLoading">No results found.</p>
+    </div>
+  </div>
+  <div class="pagination-controls">
+    <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+  </div>

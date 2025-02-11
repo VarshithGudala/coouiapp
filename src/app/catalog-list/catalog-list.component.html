@@ -1,0 +1,38 @@
+  <div class="header">
+    <h3>Product Catalog</h3>
+  </div>
+  <div class="card mt-4">
+  <form [formGroup]="productsForm" (ngSubmit)="onSubmit()">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Select</th>
+          <th>Product ID</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Quantity</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products.controls; let i = index" [formGroupName]="i">
+          <td><input type="checkbox" formControlName="selected"/></td>
+          <td>{{ product.get('id')?.value }}</td>
+          <td>{{ product.get('name')?.value }}</td>
+          <td>{{ product.get('description')?.value }}</td>
+          <td><select formControlName="quantity">
+                <option *ngFor="let qty of [1, 2, 3, 4, 5]" [value]="qty">{{ qty }}</option>
+              </select>
+        </td>
+          <td>{{ product.get('price')?.value }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    
+    <p *ngIf="!products.length">No results found.</p>
+  
+    <button *ngIf="products.length" class="btn btn-success" type="submit">Submit Order</button>
+  </form>
+  </div>
+  

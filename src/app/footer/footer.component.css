@@ -1,0 +1,14 @@
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.footer a {
+  transition: color 0.3s ease-in-out;
+}
+
+.footer a:hover {
+  color: #f8d210 !important;
+}

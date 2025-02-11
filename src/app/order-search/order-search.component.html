@@ -1,0 +1,68 @@
+<div class="header">
+  <h3>Order Search</h3>
+</div>
+<div class="card p-3">
+  <form [formGroup]="searchForm" (ngSubmit)="searchOrders()">
+    <div class="form-row">
+        <div class="form-group">
+          <label for="orderDateFrom" class="form-label">Order Date From</label>
+          <input
+            type="date"
+            id="orderDateFrom"
+            class="form-control"
+            formControlName="orderDateFrom"
+          />
+        </div>
+        <div class="form-group">
+          <label for="orderDateTo" class="form-label">Order Date To</label>
+          <input
+            type="date"
+            id="orderDateTo"
+            class="form-control"
+            formControlName="orderDateTo"
+          />
+        </div>
+        <div class="form-group">
+          <label for="orderId" class="form-label">Order ID</label>
+          <input
+            type="text"
+            id="orderId"
+            class="form-control"
+            formControlName="orderId"
+          />
+        </div>
+    </div>
+      <div class="form-row text-center">
+        <button type="submit" class="btn btn-primary" [disabled]="isLoading">
+          {{ isLoading ? 'Searching...' : 'Search Orders' }}
+        </button>
+        <button (click)="navigateToNewOrder()" class="btn btn-success">+ New Order</button>
+
+    
+    </div>
+  </form>
+</div>
+    <div class="mt-4">
+      <h4 *ngIf="orders.length">Search Results</h4>
+      <table class="table table-bordered table-hover" *ngIf="orders.length">
+        <thead class="table-dark">
+          <tr>
+            <th>Order ID</th>
+            <th>Ordered By</th>
+            <th>Ordered Date</th>
+            <th>Count of Products</th>
+            <th>Customer Id</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders">
+            <td>{{ order.orderId }}</td>
+            <td>{{ order.orderedBy }}</td>
+            <td>{{ order.orderedDate | date }}</td>
+            <td>{{ order.productCount }}</td>
+            <td>{{ order.customerId }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <p *ngIf="!orders.length && !isLoading">No results found.</p>
+    </div>

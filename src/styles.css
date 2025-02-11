@@ -1,0 +1,61 @@
+
+:root {
+  --primary-color: #3f7070;
+  --secondary-color: #ea804a;
+  --accent-color: #f3b863;
+
+  --font-headline: 'Angie Sans', sans-serif;
+  --font-subheadline: 'Roboto', sans-serif;
+  --font-body: 'Roboto', sans-serif;
+}
+
+.container {
+    padding: 20px;
+    text-align: center;
+  }
+  .headline {
+    font-family: var(--font-headline);
+    font-size: 2rem;
+    color: var(--primary-color);
+  }
+  .subheadline {
+    font-family: var(--font-subheadline);
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+  }
+  .body-text {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 1rem;
+    color: var(--primary-color);
+  }
+  .contact-info {
+    list-style: none;
+    padding: 0;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--primary-color);
+  }
+  .contact-info li {
+    margin: 10px 0;
+  }
+  .social-link {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .primary-button {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+  }
+  .primary-button:hover {
+    background-color: var(--accent-color);
+  }
