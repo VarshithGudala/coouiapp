@@ -5,27 +5,41 @@
   
   <nav class="nav">
     <ul>
-      <li><a href="/customer" (click)="navigateTo('/customer')">Shop By
-        <ul>
-          <li><a href="#">Cat 1</a></li>
-          <li><a href="#">Cat 2</a></li>
-        </ul>
-      </a></li>
-      <li><a href="#">About Us</a>
+      <li *ngIf="isLoggedIn"><a href="/customer" (click)="navigateTo('/customer')">Shop By</a>
+       </li>
+
+      <li *ngIf="isLoggedIn"><a href="#">About Us</a>
         <ul>
           <li><a href="/aboutourstory" (click)="navigateTo('/aboutourstory')">Our Story</a></li>
           <li><a href="/aboutourmission" (click)="navigateTo('/aboutourmission')">Mission</a></li>
         </ul>
       </li>
-      <li><a href="/contactus" (click)="navigateTo('/contactus')">Contact Us</a></li>
-      <li><a href="/order" (click)="navigateTo('/order')">Search</a></li>
-      <li><a href="/login" (click)="navigateTo('/login')">
-        <img src="assets/man-icon.png"  class="icon" /> Sign In
-      </a></li>
-      <li><a href="#" class="cart">
-        <img src="assets/cart-icon.png"  />
-        <span class="cart-count">0</span>
-      </a></li>
+
+      <li *ngIf="isLoggedIn"><a href="/contactus" (click)="navigateTo('/contactus')">Contact Us</a></li>
+      <li *ngIf="isLoggedIn"><a href="/order" (click)="navigateTo('/order')">Search</a></li>
+
+      <!-- Sign In menu -->
+      <li *ngIf="!isLoggedIn">
+        <a href="#" class="sign-in">
+          <img src="assets/man-icon.png" class="icon" /> Sign In
+        </a>
+        <ul>
+          <li class="login">Login</li>
+          <li><a href="#" class="sso" (click)="handleSSOLogin($event)">Continue With SSO</a></li>
+        </ul>
+      </li>
+      <li *ngIf="isLoggedIn">
+        <a href="#" class="sign-out" (click)="logout()">
+          <img src="assets/logout-icon.png" class="icon" /> Sign Out
+        </a>
+      </li>
+
+      <li>
+        <a href="#" class="cart">
+          <img src="assets/cart-icon.png" />
+          <span class="cart-count">0</span>
+        </a>
+      </li>
     </ul>
   </nav>
 </header>
