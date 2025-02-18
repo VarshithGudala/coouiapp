@@ -21,20 +21,22 @@ export class LoginComponent {
   async ngOnInit() {
     // ✅ Ensure MSAL instance is fully initialized before login
     this.pca = this.authService.instance as PublicClientApplication;
-    //this.pca.initialize();
+    this.pca.initialize();
   }
 
 
-  async login() {
+  async login(): Promise<string> {
     if (!this.pca) {
-      console.error('MSAL is not initialized yet.');
-      return;
+      this.pca = this.authService.instance as PublicClientApplication;
+      this.pca.initialize();
+      console.error('MSAL is not initialized yet, Initialized now');
+      //return "❌ MSAL is not initialized yet.";
     }
 
     if (this.authService.instance.getActiveAccount() || this.isLoggingIn) {
       this.message = "⚠️ User is already logged in or login is in progress."; // ✅ Set message
       console.log(this.message);
-      return;
+      return this.message;  // ✅ Return the message
     }
 
     this.isLoggingIn = true;
@@ -57,13 +59,14 @@ export class LoginComponent {
     } finally {
       this.isLoggingIn = false;
     }
+    return this.message; // ✅ Return the final message
   }
 
   // MSAL Configuration
  msalInstance = new PublicClientApplication({
   auth: {
-    clientId: '00e599f2-c3c0-4fc2-9bba-29489f9a189b',
-    authority: 'https://login.microsoftonline.com/tenantId/oauth2/v2.0/authorize',
+    clientId: '',
+    authority: '',
     redirectUri: 'http://localhost:4200',
     //  postLogoutRedirectUri: '/'
   },
@@ -122,43 +125,6 @@ async login2() {
         this.isLoggingIn = false;
       },
     });
-    /*// Initialize MSAL and handle redirect
-    this.msalInstance.initialize().then(() => {
-  this.msalInstance.handleRedirectPromise().then((authResponse: any) => {
-    if (authResponse) {
-      console.log('User authenticated:', authResponse);
-      // Acquire token after authentication
-      this.msalInstance.acquireTokenSilent({
-        scopes: ['User.Read'],
-        account: this.msalInstance.getAllAccounts()[0]
-      }).then(tokenResponse => {
-        console.log('Access token acquired:', tokenResponse.accessToken);
-      }).catch(err => {
-        console.error(err);
-        // Handle token acquisition error
-      });
-    } else {
-      console.log('No authentication response received');
-      // Redirect to login if user is not authenticated
-      this.msalInstance.loginRedirect({
-        scopes: ['User.Read']
-      }).catch(err => {
-        console.error(err);
-      });
-    }
-  }).catch(err => {
-    console.error(err);
-  });
-}).catch(err => {
-  console.error(err);
-});*/
-
-/*    this.authService.loginPopup().subscribe({
-      next: result => console.log('Login success:', result),
-      error: error => console.error('Login failed:', error),
-    });*/
-
-
   }
 }
 
