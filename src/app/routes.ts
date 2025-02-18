@@ -8,12 +8,13 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { AboutusOurMissionComponent } from './aboutus-our-mission/aboutus-our-mission.component';
 import { AboutusOurStoryComponent } from './aboutus-our-story/aboutus-our-story.component';
-//import { LoginComponent } from './login1/login1.component';
 import { LoginComponent } from './login/login.component';
+import { HeaderComponent } from './header/header.component';
 
 export const routes: Routes = [
-  //{ path: '', component: LoginComponent },
- // { path: '', redirectTo: 'catalog', pathMatch: 'full' },
+  { path: '', component: HeaderComponent },
+  { path: 'customer', component: CustomerSearchComponent},
+  { path: 'login', component: LoginComponent },
   { path: 'catalog', component: CatalogListComponent },
   { path: 'login', component: LoginComponent },
   { path: 'order', component: OrderSearchComponent },
@@ -25,5 +26,5 @@ export const routes: Routes = [
   { path: 'aboutus', component: AboutUsComponent },
   { path: 'aboutourmission', component: AboutusOurMissionComponent },
   { path: 'aboutourstory', component: AboutusOurStoryComponent },
-    { path: 'new-order', component: CatalogListComponent },
+  { path: 'new-order', component: CatalogListComponent },
  ];
