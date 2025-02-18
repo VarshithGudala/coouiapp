@@ -1,4 +1,15 @@
-/* Header Styling */
+/* Global styling for menu items */
+.nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+.logo img {
+  height: 40px;
+  cursor: pointer;
+}
 .header {
   position: fixed;
   top: 0;
@@ -15,56 +26,43 @@
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-.logo img {
-  height: 40px;
-  cursor: pointer;
+/* Default menu item styles */
+.nav li a {
+  background-color: #3f7070;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  display: inline-block;
 }
 
-.nav ul {
-  list-style: none;
-  display: flex;
-  align-items: center;
-  margin: 0;
-  padding: 0;
+/* Hover and Active state for menu items */
+.nav li a:hover,
+.nav li a:active {
+  color: green;
 }
-
 .nav li {
   margin: 0 15px;
   position: relative;
 }
 
-.nav a {
-  text-decoration: none;
-  color: white;
-  font-size: 16px;
-  font-family: 'Roboto', sans-serif;
-  position: relative;
-}
-
-.nav a:hover {
-  color: #ea804a;
-}
-
-.nav a:active {
-  color: #f3b863;
-}
-
-/* Hover Effect for Submenu */
+/* Submenus styling */
 .nav li ul {
   display: none;
   position: absolute;
-  background-color: #ea804a;
+  background-color: white;
   top: 100%;
   left: 0;
   min-width: 150px;
   padding: 10px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-
-.nav li:hover > ul {
-  display: block;
+.icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
 }
-
 .cart {
   display: flex;
   align-items: center;
@@ -81,8 +79,72 @@
   font-weight: bold;
 }
 
-.icon {
-  width: 18px;
-  height: 18px;
-  margin-right: 5px;
+/* Submenu items */
+.nav li ul li a {
+  background-color: white;
+  color: green;
+  display: block;
+  padding: 8px 12px;
 }
+
+/* Hover effect for submenus */
+.nav li ul li a:hover {
+  background-color: green;
+  color: white;
+}
+
+/* Display submenu on hover */
+.nav li:hover > ul {
+  display: block;
+}
+
+/* Styling for Sign In menu item */
+.nav li a.sign-in {
+  background-color: green;
+  border-radius: 8px;
+  color: white;
+  padding: 6px 6px;
+}
+
+.nav li a.sign-out {
+  background-color: green;
+  border-radius: 8px;
+  color: white;
+  padding: 6px 6px;
+}
+
+/* Styling for Continue With login */
+.nav li ul li.login {
+  background-color: white;
+  color: green;
+  display:flex;
+  font-size: 10px;
+  text-align:center;
+  margin-top: 1px;
+}
+
+/* Styling for Continue With SSO */
+.nav li ul li a.sso {
+  background-color: white;
+  color: green;
+  border: 1px solid green;
+  padding: 2px 2px;
+  font-size: 8px;
+  display: inline-block;
+  text-align: center;
+  margin-top: 2px;
+}
+
+/* Ensure Login is above Continue With SSO */
+.nav li ul li {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Additional spacing for Login label */
+/*.nav li ul li:first-child {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+*/
